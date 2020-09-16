@@ -31,6 +31,37 @@ function getMovies () {
 }
 
 function getMovieData (title) {
+  // @TODO> Refator por la comunidad
   const url = `https://www.omdbapi.com/?t=${title}&apikey=${apikey}`
   return fetch(url).then(res => res.json())
 }
+
+
+const filmSelector = document.getElementById('peliculas')
+const titleSelector = document.getElementById('title')
+
+// Eventos
+
+moviesRef.on('value', data => {
+  const peliculasData = data.val()
+  console.log('data: ', peliculasData)
+
+  let htmlFinal = ''
+  // @TODO> Refator por la comunidad, usando Arrays :-
+  for (const key in peliculasData) {
+    if (peliculasData.hasOwnProperty(key)) {
+      const element = peliculasData[key];
+      htmlFinal += `<li>${element.Title}</li>`
+    }
+  }
+  filmSelector.innerHTML = htmlFinal
+})
+
+titleSelector.addEventListener('keyup', event => {
+  const titleContent = titleSelector.value.trim()
+  if (event.key === 'Enter' && titleContent) {
+    console.log('Ahora si!!!', titleContent)
+    getMovieData(titleContent)
+      .then(addMovie)
+  }
+})

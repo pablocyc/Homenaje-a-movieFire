@@ -1,6 +1,5 @@
-console.log('Hola mundo...')
-
 const moviesRef = firebase.database().ref('peliculas')
+const apikey = '😉😉 TU TOKEN'
 
 // CRUD (CREATE, READ, UPDATE, DELETE)
 
@@ -31,25 +30,7 @@ function getMovies () {
   })
 }
 
-
-
-
-// moviesRef.update({
-//   title: "The Hulk",
-//   description: "bla bla bla",
-// })
-  
-  // [new Date().getTime(), 'Hola', 'fin'])
-
-// firebase.database().ref('users/' + userId).set({
-//   username: name,
-//   email: email,
-//   profile_picture : imageUrl
-// }, function(error) {
-//   if (error) {
-//     // The write failed...
-//   } else {
-//     // Data saved successfully!
-//   }
-// });
-
+function getMovieData (title) {
+  const url = `https://www.omdbapi.com/?t=${title}&apikey=${apikey}`
+  return fetch(url).then(res => res.json())
+}

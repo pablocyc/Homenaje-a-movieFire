@@ -3,3 +3,10 @@ body {
   color: lightgreen;
   font-family: monospace;
 }
+
+#details {
+  display: none;
+  background-color: rgb(125, 179, 118);
+  color: white;
+  font-style: italic;
+}
